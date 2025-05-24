@@ -351,7 +351,6 @@ impl<'py> IntoPyObject<'py> for PyLazyFrame {
     type Error = PyErr;
 
     fn into_pyobject(self, py: Python<'py>) -> Result<Self::Output, Self::Error> {
-        dbg!("into py");
         let polars = POLARS.bind(py);
         let cls = polars.getattr("LazyFrame")?;
         let instance = cls.call_method1(intern!(py, "__new__"), (&cls,)).unwrap();
